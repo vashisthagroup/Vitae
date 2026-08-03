@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitae - AI-Powered ATS Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent: #d4af37;
+            --accent-dark: #b8860b;
+            --border: #2a2a2a;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-primary: #ffffff;
+                --bg-secondary: #f9f9f9;
+                --text-primary: #0f0f0f;
+                --text-secondary: #666666;
+                --border: #e5e5e5;
+            }
+        }
+
+        :root[data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9f9f9;
+            --text-primary: #0f0f0f;
+            --text-secondary: #666666;
+            --border: #e5e5e5;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border: #2a2a2a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .accent {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .hero-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .hero-feature {
+            text-align: center;
+        }
+
+        .hero-feature-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .hero-feature-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 8px;
+        }
+
+        /* Section */
+        section {
+            padding: 80px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 60px;
+            max-width: 600px;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        /* Feature Detail */
+        .feature-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .feature-detail:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl;
+        }
+
+        .feature-detail:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .feature-detail-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-detail-text p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .feature-detail-visual {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            font-size: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+        }
+
+        .stat-item {
+            padding: 32px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Flow Diagram */
+        .flow-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .flow-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-radius: 50%;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .flow-text h4 {
+            font-size: 1.125rem;
+            margin-bottom: 4px;
+        }
+
+        .flow-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .checklist li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .checklist li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: var(--accent);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .feature-detail {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .feature-detail:nth-child(even) {
+                direction: ltr;
+            }
+
+            .hero-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="container">
+        <h1>Meet <span class="accent">Vitae</span></h1>
+        <p>The world's most powerful AI-driven recruitment platform. Automate screening, schedule interviews, and hire the best talent in days, not months.</p>
+
+        <div class="hero-features">
+            <div class="hero-feature">
+                <div class="hero-feature-value">100%</div>
+                <div class="hero-feature-label">Automated Screening</div>
+            </div>
+            <div class="hero-feature">
+                <div class="hero-feature-value">87%</div>
+                <div class="hero-feature-label">Avg Fit Score</div>
+            </div>
+            <div class="hero-feature">
+                <div class="hero-feature-value">14d</div>
+                <div class="hero-feature-label">Time to Hire</div>
+            </div>
+            <div class="hero-feature">
+                <div class="hero-feature-value">75%</div>
+                <div class="hero-feature-label">Interview Rate</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Core Features</h2>
+        <p class="section-subtitle">Everything you need to run a modern, automated recruitment operation</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-badge">Recruiter Dashboard</div>
+                <h3>Unified Command Center</h3>
+                <p>Real-time metrics, top candidates, scheduled interviews, and AI insights all in one place. See what matters at a glance.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">Candidate Pipeline</div>
+                <h3>Smart Filtering & Sorting</h3>
+                <p>Filter by status, fit score, and role. Bulk actions with confirmation modals. Select multiple candidates to schedule interviews instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">AI Screener</div>
+                <h3>Intelligent Evaluation</h3>
+                <p>Interactive screening questions, real-time fit scoring, and automatic categorization. AI evaluates candidates while you focus on top performers.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">Job Management</div>
+                <h3>Post & Configure Roles</h3>
+                <p>Create job postings, customize screening questions, set auto-schedule thresholds. Admin approval workflow for governance.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">Calendar Integration</div>
+                <h3>Automated Scheduling</h3>
+                <p>Interview slots, auto-scheduling based on fit scores, confirmation tracking, and instant candidate notifications.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">Admin Approvals</div>
+                <h3>Governance & Control</h3>
+                <p>Admins review and approve new job postings and screening rule changes before they go live. Full audit trail included.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">How Vitae Works</h2>
+        <p class="section-subtitle">The complete recruitment automation workflow</p>
+
+        <div class="flow-container">
+            <div class="flow-step">
+                <div class="flow-number">1</div>
+                <div class="flow-text">
+                    <h4>Candidate Applies</h4>
+                    <p>Candidate submits application through Global Job Search portal or external job boards. Application automatically enters the pipeline.</p>
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-number">2</div>
+                <div class="flow-text">
+                    <h4>AI Screening Begins</h4>
+                    <p>Candidate answers custom screening questions. AI evaluates responses and calculates a fit score based on role requirements.</p>
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-number">3</div>
+                <div class="flow-text">
+                    <h4>Smart Categorization</h4>
+                    <p>Fit score compared to role's auto-schedule threshold (typically 75%). High scorers automatically move to interviews; low scorers receive feedback.</p>
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-number">4</div>
+                <div class="flow-text">
+                    <h4>Calendar Sync</h4>
+                    <p>Interview slots are booked automatically, calendar invites sent, and reminders triggered. Recruiter sees everything in unified schedule.</p>
+                </div>
+            </div>
+
+            <div class="flow-step">
+                <div class="flow-number">5</div>
+                <div class="flow-text">
+                    <h4>Recruiter Manages</h4>
+                    <p>Recruiter reviews pipeline, reschedules if needed, takes notes on candidates, and moves top performers to next round.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Key Differentiators</h2>
+
+        <div class="feature-detail" style="margin-bottom: 80px;">
+            <div class="feature-detail-text">
+                <h3>Separate Login Flows</h3>
+                <p>Recruiters and candidates use completely separate accounts and experiences. No mixing of user types, no confusion, maximum security.</p>
+                <p>Each role sees only what they need to see and can only perform actions appropriate to their role.</p>
+                <ul class="checklist">
+                    <li>Recruiter login → Dashboard, Pipeline, Roles, Scheduling, Admin Approvals</li>
+                    <li>Candidate login → Job Search, Applications, AI Screener, Profile</li>
+                </ul>
+            </div>
+            <div class="feature-detail-visual">🔐</div>
+        </div>
+
+        <div class="feature-detail" style="margin-bottom: 80px;">
+            <div class="feature-detail-text">
+                <h3>World-Class Design</h3>
+                <p>Clean, intuitive interface with clear button-focused navigation. Premium ATS aesthetic inspired by the best platforms in the world.</p>
+                <p>Minimalist design reduces cognitive load and lets recruiters focus on what matters: finding great talent.</p>
+            </div>
+            <div class="feature-detail-visual">✨</div>
+        </div>
+
+        <div class="feature-detail" style="margin-bottom: 80px;">
+            <div class="feature-detail-text">
+                <h3>Permission Layers</h3>
+                <p>Distinguishes between Recruiters and Administrators. Admins control job approvals, rule changes, and system settings.</p>
+                <p>Built-in governance ensures compliance and prevents unauthorized changes to critical configurations.</p>
+            </div>
+            <div class="feature-detail-visual">⚙️</div>
+        </div>
+
+        <div class="feature-detail">
+            <div class="feature-detail-text">
+                <h3>Confirmation Modals</h3>
+                <p>Critical actions require confirmation. Bulk operations show how many records will be affected before proceeding.</p>
+                <p>Prevents accidental changes and keeps recruiters in control of the system at all times.</p>
+            </div>
+            <div class="feature-detail-visual">✓</div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Impact by the Numbers</h2>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">70%</div>
+                <div class="stat-label">Time Saved Per Hire</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">14</div>
+                <div class="stat-label">Days Average to Hire</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$0.42</div>
+                <div class="stat-label">Cost Per Screened Lead</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Candidates Screened</div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 60px; color: var(--text-secondary); font-size: 0.95rem;">
+            These metrics are based on typical usage. Actual results vary by company size, hiring volume, and industry.
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Platform Architecture</h2>
+        <p class="section-subtitle">Built on modern, scalable technology</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-badge">Frontend</div>
+                <h3>Next.js + React</h3>
+                <p>Server-side rendering, TypeScript, Tailwind CSS. Responsive design that works on desktop and mobile.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">Authentication</div>
+                <h3>Secure Auth System</h3>
+                <p>JWT-based authentication with separate login flows for recruiters and candidates. LinkedIn OAuth ready.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">Database Ready</div>
+                <h3>Schema Defined</h3>
+                <p>TypeScript types for all entities. Ready for PostgreSQL, MongoDB, or your database of choice.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">API Structure</div>
+                <h3>RESTful Endpoints</h3>
+                <p>Organized API routes for auth, jobs, candidates, applications, interviews, and approvals.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">AI Integration</div>
+                <h3>Gemini Ready</h3>
+                <p>Pre-configured for Google Gemini API. Drop in your API key and start screening candidates with AI.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">GitHub</div>
+                <h3>Version Control</h3>
+                <p>Complete source code on GitHub at vashisthagroup/Vitae. Ready for CI/CD, deployment, and collaboration.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title">Getting Started</h2>
+        <p class="section-subtitle">Deploy Vitae in minutes</p>
+
+        <div class="flow-container">
+            <h4 style="margin-bottom: 30px;">Quick Start:</h4>
+            <pre style="overflow-x: auto; padding: 20px; background: var(--bg-primary); border-radius: 6px; border: 1px solid var(--border); color: var(--accent);">git clone https://github.com/vashisthagroup/Vitae.git
+cd vitae
+npm install
+npm run dev
+# Visit http://localhost:3000</pre>
+
+            <h4 style="margin-top: 40px; margin-bottom: 20px;">Environment Setup:</h4>
+            <ul class="checklist">
+                <li>Copy .env.example to .env.local</li>
+                <li>Add your Gemini API key for AI screening</li>
+                <li>Configure LinkedIn OAuth credentials (optional)</li>
+                <li>Set up your database connection</li>
+                <li>Run migrations and seed initial data</li>
+            </ul>
+
+            <h4 style="margin-top: 40px; margin-bottom: 20px;">Next Steps:</h4>
+            <ul class="checklist">
+                <li>Customize branding and colors to match your company</li>
+                <li>Set up your database (PostgreSQL recommended)</li>
+                <li>Configure email service for candidate notifications</li>
+                <li>Set up calendar integrations (Google Calendar, Outlook)</li>
+                <li>Train your team on the platform</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to Transform Recruitment?</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Vitae is the complete ATS platform for modern recruiting teams. Automate screening, schedule interviews, and hire better talent faster.
+        </p>
+        <a href="https://github.com/vashisthagroup/Vitae" class="cta-button">View on GitHub →</a>
+        <p style="color: var(--text-secondary); margin-top: 40px; font-size: 0.9rem;">
+            Built by Vashistha Group. Licensed under MIT.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
