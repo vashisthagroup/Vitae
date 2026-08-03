@@ -20,7 +20,6 @@ let jobs: any[] = [
     screened: 3,
     createdAt: new Date('2026-07-28'),
     createdBy: '1',
-    status: 'active',
   },
   {
     id: '2',
