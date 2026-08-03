@@ -17,28 +17,18 @@ export function PortalSwitcher() {
             Vitae
           </Link>
 
-          {/* Portal Switcher */}
+          {/* Portal Indicator - Show only current mode */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => switchMode('recruiter')}
-              className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                mode === 'recruiter'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              Recruiter Mode
-            </button>
-            <button
-              onClick={() => switchMode('candidate')}
-              className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                mode === 'candidate'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-300 hover:text-white'
-              }`}
-            >
-              Candidate Mode
-            </button>
+            {mode === 'recruiter' && (
+              <span className="px-4 py-2 rounded-md font-medium text-blue-400 bg-blue-900">
+                Recruiter Portal
+              </span>
+            )}
+            {mode === 'candidate' && (
+              <span className="px-4 py-2 rounded-md font-medium text-blue-400 bg-blue-900">
+                Candidate Portal
+              </span>
+            )}
           </div>
 
           {/* User Info */}
