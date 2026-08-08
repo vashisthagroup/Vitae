@@ -30,10 +30,10 @@ export default function Home() {
       <div className="max-w-2xl text-center">
         <h1 className="text-5xl font-bold text-black mb-4">Vitae</h1>
         <p className="text-xl text-gray-700 mb-8">
-          AI-Powered Recruitment Automation Platform
+          Enterprise Hiring Platform
         </p>
         <p className="text-lg text-gray-600 mb-12">
-          Automated talent acquisition with intelligent screening, instant scheduling, and comprehensive analytics.
+          AI-powered recruitment automation with intelligent screening, instant scheduling, and comprehensive analytics.
         </p>
 
         <div className="flex gap-4 justify-center flex-col sm:flex-row">
